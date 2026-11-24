@@ -293,7 +293,7 @@ details.done-list summary{cursor:pointer;font-weight:700;color:var(--muted)}
 <main class="wrap" id="main"></main>
 <div class="toast" id="toast" role="status"></div>
 <div id="pdfstage" aria-hidden="true"></div>
-<div class="ver" id="ver">版本 115/11/24 16:08</div>
+<div class="ver" id="ver">版本 115/11/24 16:19</div>
 
 <script>
 /* ───────── 角色 SVG（取自小布迪角色設計） ───────── */
@@ -883,9 +883,8 @@ function viewOpt(){
 
   const dir=staffDir();
   const pay=`<section class="card">
-    <div class="sec-h"><h2>2. 托育人員薪資清冊</h2><span class="meta">${d.imported?esc(d.imported):'尚未匯入'}</span></div>
-    <div class="tip" style="margin-bottom:12px"><b>不用手打</b>　到出勤薪資系統「月底薪資結算 → 📤 優化補助匯出」，選 ${OPT.y} 年第 ${OPT.q} 季下載檔案，再按下面的按鈕匯入。職稱、身分證字號填過一次就會記住。</div>
-    <label class="btn" style="display:inline-block;cursor:pointer">匯入薪資檔<input id="o-import" type="file" accept=".json,application/json" hidden></label>
+    <div class="sec-h"><h2>2. 托育人員薪資清冊</h2><span class="meta">${OPT.y} 年 ${OPT.q*3-2}–${OPT.q*3} 月</span></div>
+    <div class="tip" style="margin-bottom:12px"><b>直接填表</b>　每個月按「＋ 新增一列」填老師的薪資；第 2、3 個月可以按「複製上個月名單」再改數字。職稱、身分證字號填過一次就會記住。</div>
     ${d.months.map((mo,mi)=>{
       const rows=mo.rows.filter(r=>!r.skip);
       return `<div style="margin-top:16px"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px"><b style="font-size:15px">${mo.month} 月</b><span class="muted" style="font-size:13px">${rows.length} 人列入・實領合計 <span class="num">$${money(rows.reduce((a,r)=>a+rowA(r)-rowB(r),0))}</span></span>
@@ -898,7 +897,7 @@ function viewOpt(){
           <td class="num" id="o-net-${mi}-${ri}">${money(rowA(r)-rowB(r))}</td>
           <td><input id="o-note-${mi}-${ri}" data-row="note" data-mi="${mi}" data-ri="${ri}" value="${esc(r.note||'')}" style="width:90px"></td>
           <td><button class="x" data-act="o-delrow" data-mi="${mi}" data-ri="${ri}" aria-label="刪除這一列" style="width:28px;height:28px">×</button></td></tr>`).join('')
-          :`<tr><td colspan="13" class="muted" style="text-align:left;padding:10px">還沒有資料，匯入薪資檔或按「新增一列」。</td></tr>`}
+          :`<tr><td colspan="13" class="muted" style="text-align:left;padding:10px">還沒有資料，按「＋ 新增一列」開始填。</td></tr>`}
         </tbody></table></div></div>`;}).join('')}
   </section>`;
 
